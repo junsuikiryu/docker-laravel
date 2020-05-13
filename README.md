@@ -1,4 +1,10 @@
-directory tree
+# Usage
+```
+$ docker-compose up -d --build
+```
+access to "localhost:8000".
+
+# directory tree
 ```
 .
 ├── README.md
@@ -7,17 +13,11 @@ directory tree
 │   │   └── Dockerfile
 │   │   └── my.cnf
 │   ├── nginx
-│   │   └── default.conf # nginxの設定ファイル
+│   │   └── default.conf
 │   └── php
 │       ├── Dockerfile
 │       └── php.ini
 ├── docker-compose.yml
 ├── logs
-│   ├── access.log       # nginxのアクセスログ
-│   ├── error.log        # nginxのエラーログ
-│   ├── mysql-error.log
-│   ├── mysql-query.log
-│   ├── mysql-slow.log
-│   └── php-error.log
-└── src # Laravelをインストールするディレクトリ
+└── src # directory which laravel is installed.
 ```
