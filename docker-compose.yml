@@ -4,6 +4,9 @@ services:
     build: ./docker/mysql
     volumes:
       - db-store:/var/lib/mysql-files
+      - ./docker/mysql/mysql_init:/docker-entrypoint-initdb.d
+      - ./docker/mysql/data:/var/lib/mysql
+      - ./docker/mysql/conf/:/etc/mysql/conf.d
     environment:
       - MYSQL_DATABASE=${DB_NAME}
       - MYSQL_USER=${DB_USER}
