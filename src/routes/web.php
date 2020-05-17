@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/test', function () {
+  $test = "test page<br>";
+  return view('test',compact('test'));
+});

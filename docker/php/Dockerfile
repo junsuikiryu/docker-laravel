@@ -13,4 +13,4 @@ RUN set -eux && \
   curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
   composer config -g repos.packagist composer https://packagist.jp && \
   composer global require hirak/prestissimo
-RUN composer create-project --prefer-dist "laravel/laravel=6.*" .
+RUN docker-php-ext-install mysqli
