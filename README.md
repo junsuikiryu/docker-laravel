@@ -2,6 +2,8 @@ Practice of web service system on docker
 
 # Usage
 ```
+$ cd docker-laravel
+$ mkdir ./logs docker/mysql/logs
 $ docker-compose up -d --build
 ```
 access to "localhost:8000".
@@ -10,16 +12,19 @@ access to "localhost:8000".
 ```
 .
 ├── README.md
-├── docker
-│   ├── mysql
+├── docker/
+│   ├── mysql/
 │   │   └── Dockerfile
 │   │   └── my.cnf
-│   ├── nginx
+│   │   └── logs/
+│   │   └── data/	# DB data for mysql.
+│   │   └── mysql_init/
+│   ├── nginx/
 │   │   └── default.conf
-│   └── php
+│   └── php/
 │       ├── Dockerfile
 │       └── php.ini
 ├── docker-compose.yml
-├── logs
-└── src # directory which laravel is installed.
+├── logs/
+└── src/ # directory which laravel is installed.
 ```

@@ -19,3 +19,10 @@ Route::get('/test', function () {
   $test = "test page<br>";
   return view('test',compact('test'));
 });
+
+Route::get('/hoge/form', function () {
+    return view('hoge/form');
+});
+Route::post('/hoge/form', 'QueryController@foobar');
+// Route::match(['get', 'post'],'hoge/form', 'QueryController@signin');
+// Route::get('members/signin_complete', 'QueryController@signin_complete');

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>PHPの基本的な書き方</title>
+    <title>test page for sql</title>
   </head>
   <body>
     <?php
@@ -20,13 +20,6 @@
     $sql = "SELECT * FROM users";
     if ($result = $mysqli->query($sql)) {
 
-        // 連想配列を取得
-        // while ($row = $result->fetch_assoc()) {
-        //     echo $row["id"] . " : " . $row["name"] . "<br>";
-        // }
-        // 結果セットを閉じる
-
-		//連想配列で取得
 		while($row = $result->fetch_array(MYSQLI_ASSOC)){
 		    $rows[] = $row;
 		}
@@ -40,7 +33,6 @@
 		</tr>
 	</thead>
 </table>
-
 		<?php
 		}
 	    $result->close();
@@ -49,6 +41,9 @@
     // DB接続を閉じる
     $mysqli->close();
     ?>
-
+<label class="form-inline">
+    <input class="btn btn-default form-control" type="submit" name="foo" value="Foo">
+    <input class="btn btn-default form-control" type="submit" name="bar" value="Bar">
+</label>
   </body>
 </html>
