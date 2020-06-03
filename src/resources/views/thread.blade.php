@@ -15,27 +15,30 @@ if (isset($_GET['id'])){
 		<head>
 			<meta charset='utf-8' />
 		</head>
-		<title>{{$thread_title}}</title>
+		<title>タイトル: {{$thread_title}}, id:{{$_GET['id']}}</title>
 		<body>
 			<font size='5'>{{$thread_title}}</font>
 		</body>
 	</html>
-
 	<?php
 	$comments = DB::table('comment')->where('thread_id', $_GET['id'])->orderBy('post_id', 'asc')->get();
+	$line_array = ["\r\n", "\r", "\n"];
 	foreach($comments as $comment){ ?>
-		<table border="1" cellspacing="0" width="70%">
-			<tr valign="middle" align="center">
-				<td width=50>{{$comment->post_id}}</td>
+		<?php
+		$text = str_replace($line_array, '<br>', $comment->sentence);
+		?>
+		<table border="0" cellspacing="0" width="70%">
+			<tr valign="middle" align="left">
+				<td width=50>{{$comment->post_id}}:</td>
 				<td>{{$comment->name}}</td>
-				<td width=250>{{$comment->time_posted}}</td>
+				<td>{{$comment->time_posted}}</td>
 			</tr>
 		</table>
 		<table border="1" cellspacing="0" width="70%">
 			<tr valign = "top" align = "left">
-				<td>{{$comment->sentence}}</td>
+				<td><?php echo $text; ?></td>
 			</tr>
-		</table><br> <?php
+		</table><br><br> <?php
 	}
 }
 $num_posts = DB::table('thread')->select('posts')->where('id', $_GET['id'])->get()[0]->posts+1;
