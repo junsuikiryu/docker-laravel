@@ -12,17 +12,20 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('top');
 });
 
-Route::get('/test', function () {
-  $test = "test page<br>";
-  return view('test',compact('test'));
+Route::get('/thread', function () {
+    return view('thread');
 });
+Route::post('/thread', 'CommentController@add_comment');
 
-Route::get('/hoge/form', function () {
-    return view('hoge/form');
+Route::get('/delete_thread', function () {
+    return view('/delete_thread');
 });
-Route::post('/hoge/form', 'QueryController@foobar');
-// Route::match(['get', 'post'],'hoge/form', 'QueryController@signin');
-// Route::get('members/signin_complete', 'QueryController@signin_complete');
+Route::post('/delete_thread', 'ThreadController@delete_thread');
+
+Route::get('/create_thread', function () {
+    return view('create_thread');
+});
+Route::post('/create_thread', 'ThreadController@create_thread');
