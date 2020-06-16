@@ -45,5 +45,11 @@ services:
     environment:
       - TZ=${TZ}
 
+  node:
+    image: node:12.8-alpine
+    volumes:
+      - ./src:/work
+    working_dir: /work
+
 volumes:
   db-store:

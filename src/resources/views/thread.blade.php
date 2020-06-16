@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <?php
 use Illuminate\Support\Facades\DB;
 if (isset($_GET['id'])){
@@ -8,18 +11,14 @@ if (isset($_GET['id'])){
 	}
 	global $thread_title;
 	$thread_title = $thread_info[0]->title;
+?>
 
-	?>
-	<!DOCTYPE html>
-	<html>
-		<head>
-			<meta charset='utf-8' />
-		</head>
-		<title>タイトル: {{$thread_title}}, id:{{$_GET['id']}}</title>
-		<body>
-			<font size='5'>{{$thread_title}}</font>
-		</body>
-	</html>
+<p style="text-align:center;">
+<font size='10' align="center">{{$thread_title}}</font>
+</p>
+
+<div class="container">
+<div class="row justify-content-center">
 	<?php
 	$comments = DB::table('comment')->where('thread_id', $_GET['id'])->orderBy('post_id', 'asc')->get();
 	$line_array = ["\r\n", "\r", "\n"];
@@ -34,7 +33,7 @@ if (isset($_GET['id'])){
 				<td>{{$comment->time_posted}}</td>
 			</tr>
 		</table>
-		<table border="1" cellspacing="0" width="70%">
+		<table class="table table-bordered">
 			<tr valign = "top" align = "left">
 				<td><?php echo $text; ?></td>
 			</tr>
@@ -49,8 +48,15 @@ $num_posts = DB::table('thread')->select('posts')->where('id', $_GET['id'])->get
 	<input type="hidden" name="thread_id" value="{{$_GET['id']}}">
 	<input type="hidden" name="URI" value="{{$_SERVER["REQUEST_URI"]}}">
 	<input type="hidden" name="post_id" value="{{$num_posts}}">
-	名前:<input type = "text" size="40" name ="name" value="名無し" required="true"><br>
-	本文<br><textarea name="sentence" cols="60" rows="8" required="true"></textarea><br>
-	<input type = "submit" value ="post">
+	名前:<input type = "text" class="form-control" size="40" name ="name" value="名無し" required="true"><br>
+	本文<br><textarea class="form-control" name="sentence" cols="60" rows="8" required="true"></textarea><br>
+	<div style="display:inline-flex; float:right;">
+	<input class="btn btn-primary" type = "submit" value ="post">
+	</div>
 </form>
-<a href="top" size=20>スレッド一覧</a>
+</div>
+</div>
+<p style="text-align:center;">
+	<a href="top" size=20><font size="5">スレッド一覧</font></a>
+</p>
+@endsection
