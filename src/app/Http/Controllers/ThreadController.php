@@ -30,6 +30,10 @@ class ThreadController extends Controller
 			'sentence'=>$request->sentence,
 			'time_posted'=>$time
 		]);
+		DB::table('thread_auther')->insert([
+			'thread_id'=>$thread_id,
+			'user_id'=>Auth::id()
+		]);
 		header("Location: /thread?id={$thread_id}");
 		return;
 	}
@@ -42,27 +46,27 @@ class ThreadController extends Controller
 		foreach($list as $li){
 			DB::table('thread')->where('id', $li)->delete();
 			DB::table('comment')->where('thread_id', $li)->delete();
+			DB::table('thread_auther')->where('thread_id', $li)->delete();
 		}
 		return view('/top');
 	}
 
 	public function check_auth_create_thread(){
-
 		if (Auth::check()){
-		  return view('create_thread');
+			return view('create_thread');
 		} else {
 		// ログインしていないときの処理
-		  return redirect('top');
+			return redirect('top');
 		}
 	}
 
 	public function check_auth_delete_thread(){
 
 		if (Auth::check()){
-		  return view('delete_thread');
+			return view('delete_thread')->with('user_id',Auth::id());
 		} else {
 		// ログインしていないときの処理
-		  return redirect('top');
+			return redirect('top');
 		}
 	}
 }

@@ -15,3 +15,8 @@ create table comment (
   time_posted datetime not null,
   primary key (id)
 );
+create table thread_auther (
+  thread_id int(4) not null,
+  user_id int(4) not null,
+  primary key (thread_id)
+);

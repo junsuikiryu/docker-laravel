@@ -56,12 +56,12 @@
 	</nav>
 	<div class="container">
 		<?php
-
 		use Illuminate\Support\Facades\DB;
 		use Illuminate\Support\Facades\Schema;
 
-		if (!isset($_GET['search_word']))
-			$results = DB::table('thread')->orderBy('title', 'asc')->get();
+		if (!isset($_GET['search_word'])){
+			$results = DB::table('thread')->join('thread_auther', 'thread.id', '=', 'thread_auther.thread_id')->where('user_id', '=', $user_id)->orderBy('title', 'asc')->get();
+		}
 		else if ($_GET['search_word'] === '')
 			$results = DB::table('thread')->orderBy('title', 'asc')->get();
 		else
@@ -83,12 +83,8 @@
 			?>
 			<table class="table table-sm table-hover">
 				<tr valign="middle" align="center">
-					<td>
-						<a href="thread?id={{$row->id}}">{{$row->title}}</a>
-					</td>
-					<td width = "500">
-						{{$row->posts}}
-					</td>
+					<td><a href="thread?id={{$row->id}}"> {{$row->title}} </a></td>
+					<td width = "500">{{$row->posts}}</td>
 					<td width = "200" ><input type="checkbox" name="delete[]" value="{{$row->id}}"></td>
 				</tr>
 			</table>
