@@ -20,9 +20,9 @@ class ThreadController extends Controller
 			'title'=>$request->thread_title,
 			'posts'=>1
 		]);
+		$thread_id = DB::getPdo()->lastInsertId();
 		date_default_timezone_set('Asia/Tokyo');
 		$time = date("Y/m/d H:i:s");
-		$thread_id = DB::table('thread')->where('title', $request->thread_title)->get()[0]->id;
 		DB::table('comment')->insert([
 			'thread_id'=>$thread_id,
 			'post_id'=>1,

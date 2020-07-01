@@ -35,7 +35,7 @@ if (isset($_GET['id'])){
 		</table>
 		<table class="table table-bordered">
 			<tr valign = "top" align = "left">
-				<td><?php echo $text; ?></td>
+				<td>{{$text}}</td>
 			</tr>
 		</table><br><br> <?php
 	}

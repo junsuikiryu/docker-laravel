@@ -41,6 +41,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+Route::post('/android_top', 'AndroidController@get_thread_list');
+Route::get('/android_top', 'AndroidController@get_thread_list');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/android_thread', 'AndroidController@get_comment_list');
+Route::get('/android_thread', 'AndroidController@get_comment_list');
+// Route::post('/android_thread', 'AndroidController@add_comment');
