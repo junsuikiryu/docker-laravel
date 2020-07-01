@@ -16,15 +16,15 @@ access to "localhost:8000".
 │   ├── mysql/
 │   │   └── Dockerfile
 │   │   └── my.cnf
-│   │   └── logs/
 │   │   └── data/	# DB data for mysql.
-│   │   └── mysql_init/
+│   │   └── mysql_init/ # script dir which initialize DB
 │   ├── nginx/
-│   │   └── default.conf
+│   |   ├── conf.d
+│   │   └── ssl
 │   └── php/
 │       ├── Dockerfile
 │       └── php.ini
 ├── docker-compose.yml
 ├── logs/
-└── src/ # directory which laravel is installed.
+└── src/ # dir which laravel is installed.
 ```
