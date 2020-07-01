@@ -14,7 +14,7 @@ services:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
       - TZ=${TZ}
     ports:
-    - 3306:3306
+    - "3306:3306"
   app:            # アプリケーションサーバ用コンテナ
     build:
       context:    ./docker/php
@@ -32,19 +32,29 @@ services:
       - DB_USERNAME=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - TZ=${TZ}
-  web:            # Webサーバ用コンテナ
-    image:        nginx:1.17-alpine
+  https-portal:
+    image: steveltn/https-portal:1
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+    environment:
+      DOMAINS: 'localhost -> http://web:8000'
+      STAGE: 'local'
+    volumes:
+      - ./docker/nginx/ssl:/var/lib/https-portal
+  web:
+    image: nginx:1.17-alpine
     depends_on:
       - app
     ports:
-      - 8000:80
+      - "8000:8000"
     volumes:
       - ./src:/work
       - ./logs:/var/log/nginx
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
     environment:
       - TZ=${TZ}
-
   node:
     image: node:12.8-alpine
     volumes:
